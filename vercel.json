@@ -1,0 +1,17 @@
+{
+  "functions": {
+    "api/index.py": {
+      "runtime": "python3.12@3.12.0",
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.py" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "pip install -r api/requirements.txt",
+  "framework": null,
+  "devCommand": null
+}
