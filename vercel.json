@@ -10,7 +10,7 @@
   ],
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/dist",
-  "installCommand": "pip install -r api/requirements.txt",
+  "installCommand": "uv pip install -r api/requirements.txt --system",
   "framework": null,
   "devCommand": null
 }
