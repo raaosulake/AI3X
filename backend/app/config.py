@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Optional
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = BASE_DIR.parent
@@ -35,7 +35,7 @@ def _get_fernet_key() -> bytes:
         return FERNET_KEY_FILE.read_bytes()
     import platform
     machine_id = platform.node().encode() or b"default-machine-id"
-    kdf = PBKDF2(algorithm=hashes.SHA256(), length=32, salt=b"ai-test-doc-gen-salt", iterations=100000)
+    kdf = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=b"ai-test-doc-gen-salt", iterations=100000)
     key = base64.urlsafe_b64encode(kdf.derive(machine_id))
     FERNET_KEY_FILE.write_bytes(key)
     return key
